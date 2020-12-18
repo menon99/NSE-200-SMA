@@ -11,7 +11,6 @@ const getStockName = require("./readInput");
 const sortResult = require("./arrayUtils").sortResult;
 const getAvgRecord = require("./arrayUtils").getAvgRecord;
 const writeStockDataToCSV = require("./csvUtils").writeNewStockDataToCSV;
-const writeRecordToAvgCSV = require("./csvUtils").writeRecordToAvgCsv;
 
 const DAY_BUFFER = 50;
 
@@ -65,16 +64,15 @@ const addStock = (name) => {
     let stockData = getStockData(resolved);
     if (!stockData.length) {
       console.log(`No data for ${stockName}`);
-      resolve();
+      resolve({});
       return;
     }
     const record = getAvgRecord(stockName, stockData);
 
     await writeStockDataToCSV(stockName, stockData);
-    await writeRecordToAvgCSV([record]);
 
     console.log(`${stockName} data written.`);
-    resolve();
+    resolve(record);
   });
 };
 
