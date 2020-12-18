@@ -53,8 +53,8 @@ const writeNewStockDataToCSV = async (stockName, data) => {
     fs.writeFile(csvPath, "", async (err) => {
       if (err) throw err;
       await csvWriter.writeRecords(data);
+      resolve();
     });
-    resolve();
   });
 };
 
@@ -79,8 +79,8 @@ const writeRecordToAvgCsv = async (records, rewrite = false) => {
     fs.writeFile(csvPath, "", async (err) => {
       if (err) throw err;
       await createCsvWriter(options).writeRecords(records);
+      resolve();
     });
-    resolve();
   });
 };
 
