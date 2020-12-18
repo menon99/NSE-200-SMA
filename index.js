@@ -4,7 +4,7 @@ const writeRecordToAvgCSV = require("./utils/csvUtils").writeRecordToAvgCsv;
 
 const main = async () => {
   let stocksList = await getStocksList();
-  const promises = stocksList.map(({ STOCK }) => addStock(STOCK));
+  const promises = stocksList.map(({ STOCK }) => addStock(STOCK.trim()));
   const records = (await Promise.all(promises)).filter(
     (ele) => Object.keys(ele).length > 0
   );
